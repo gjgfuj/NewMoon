@@ -1,13 +1,14 @@
 _G.newmoon = {}
-function newmoon.copytable(orig)
+newmoon.helper = {}
+function newmoon.helper.copytable(orig)
     local orig_type = type(orig)
     local copy
     if orig_type == 'table' then
         copy = {}
         for orig_key, orig_value in next, orig, nil do
-            copy[newmoon.copytable(orig_key)] = newmoon.copytable(orig_value)
+            copy[newmoon.helper.copytable(orig_key)] = newmoon.helper.copytable(orig_value)
         end
-        setmetatable(copy, newmoon.copytable(getmetatable(orig)))
+        setmetatable(copy, newmoon.helper.copytable(getmetatable(orig)))
     else -- number, string, boolean, etc
         copy = orig
     end

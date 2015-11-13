@@ -12,8 +12,8 @@ function testblock.init:top()
 end
 function testblock.callback:onClick()
     print("clicked!")
-    local inventoryLeft = self.world:getAPI("left", newmoon.api.inventory)
-    local inventoryRight = self.world:getAPI("right", newmoon.api.inventory)
+    local inventoryLeft = self.world:getAPI("left", newmoon.api.inventory)[1]
+    local inventoryRight = self.world:getAPI("right", newmoon.api.inventory)[1]
     inventoryRight:insertItem(inventoryLeft:extractItem())
 end
 local testchest = newmoon.block.new({name="testChest"})

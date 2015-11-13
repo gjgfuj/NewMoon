@@ -21,11 +21,12 @@ function inventory.blank:extractItem(slot)
     return val
 end
 function inventory.install(component, size)
-    local inv = newmoon.copytable(inventory.blank)
+    local inv = newmoon.helper.copytable(inventory.blank)
     inv.size = size or 4
     component.__inventory = inv
 end
 function inventory.get(component)
     return component.__inventory
 end
+newmoon.api.inventory = inventory
 return inventory
