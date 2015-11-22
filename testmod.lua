@@ -10,7 +10,7 @@ end
 function testblock.init:top()
     self.sprite = newmoon.texture.new("testblock_top")
 end
-function testblock.callback:onClick()
+function testblock.callback:onUse()
     print("clicked!")
     local inventoryLeft = self.world:getAPI("left", newmoon.api.inventory)[1]
     local inventoryRight = self.world:getAPI("right", newmoon.api.inventory)[1]

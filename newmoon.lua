@@ -24,7 +24,8 @@ function newmoon.mod.create(id)
     newmoon.mod.currentmod = id
     return {id=id}
 end
-require("newmoon/block")
+newmoon.block = require("newmoon/block")
+newmoon.item = require("newmoon/item")
 newmoon.api = {}
-require("newmoon/api/inventory")
+newmoon.api.inventory = require("newmoon/api/inventory")
 return newmoon
