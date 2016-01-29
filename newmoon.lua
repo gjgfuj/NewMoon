@@ -1,4 +1,4 @@
-_G.newmoon = {}
+_G.newmoon = {__apiname="newmoon"}
 ---Helper functions for general lua stuff.
 newmoon.helper = {}
 function newmoon.helper.copytable(orig)
@@ -18,13 +18,18 @@ end
 newmoon.helper.optionaltablemeta = {}
 function newmoon.helper.optionaltablemeta.__index(t,k)
     print(t.."."..k.." not implemented")
+    t[k] = newmoon.helper.optionaltable(t.."."..k)
+    return t[k]
+end
+function newmoon.helper.optionaltablemeta.__call(t,k)
+    print(t.."."..k.."() not implemented")
+    return nil,"Not implemented"
 end
 function newmoon.helper.optionaltable(name)
     return setmetatable({__apiname=name}, newmoon.helper.optionaltablemeta)
 end
-local tnew = newmoon.helper.optionaltable
+setmetatable(newmoon,newmoon.helper.optionaltablemeta)
 ---Mod stuff.
-newmoon.mod = {}
 newmoon.mod.mods = {}
 ---Create a new mod. Will register it to whatever registry is required.
 function newmoon.mod.create(id)
@@ -33,9 +38,4 @@ function newmoon.mod.create(id)
     newmoon.mod.currentmod = mod
     return mod
 end
-newmoon.object = require("newmoon/object")
-newmoon.item = require("newmoon/item")
-newmoon.texture = tnew("texture")
-newmoon.api = tnew("api")
-newmoon.api.inventory = require("newmoon/api/inventory")
 return newmoon
