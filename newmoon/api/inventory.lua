@@ -1,4 +1,4 @@
-local inventory = newmoon.helper.optionaltable("inventory")
+local inventory = newmoon.helper.optionaltable("newmoon.api.inventory")
 inventory.blank = {}
 inventory.blank.inv = {}
 ---Modify this to change the maximum size of the inventory.

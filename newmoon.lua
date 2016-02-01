@@ -14,28 +14,56 @@ function newmoon.helper.copytable(orig)
     copy = orig
     end
     return copy
+end-- Compatibility: Lua-5.1
+function newmoon.helper.split(str, pat)
+    local t = {}  -- NOTE: use {n = 0} in Lua-5.0
+    local fpat = "(.-)" .. pat
+    local last_end = 1
+    local s, e, cap = str:find(fpat, 1)
+    while s do
+        if s ~= 1 or cap ~= "" then
+            table.insert(t,cap)
+        end
+        last_end = e+1
+        s, e, cap = str:find(fpat, last_end)
+    end
+    if last_end <= #str then
+        cap = str:sub(last_end)
+        table.insert(t, cap)
+    end
+    return t
 end
-newmoon.helper.optionaltablemeta = {}
-function newmoon.helper.optionaltablemeta.__index(t,k)
-    print(t.."."..k.." not implemented")
-    t[k] = newmoon.helper.optionaltable(t.."."..k)
-    return t[k]
+local optionaltablemeta = {}
+local function optionaltable(name,tbl)
+    if not tbl then
+        tbl = {}
+    end
+    tbl.__apiname = name
+    return setmetatable(tbl, optionaltablemeta)
 end
-function newmoon.helper.optionaltablemeta.__call(t,k)
-    print(t.."."..k.."() not implemented")
+function optionaltablemeta.__index(t,k)
+    print(t.__apiname.."."..k.." not implemented")
+    return optionaltable(t.__apiname.."."..k)
+end
+function optionaltablemeta.__call(t)
+    print(t.__apiname.."() not implemented")
     return nil,"Not implemented"
 end
-function newmoon.helper.optionaltable(name)
-    return setmetatable({__apiname=name}, newmoon.helper.optionaltablemeta)
-end
-setmetatable(newmoon,newmoon.helper.optionaltablemeta)
+setmetatable(newmoon,optionaltablemeta)
+newmoon.helper.optionaltable = optionaltable
 ---Mod stuff.
+newmoon.mod = optionaltable()
 newmoon.mod.mods = {}
+newmoon.mod.createcallbacks = {}
 ---Create a new mod. Will register it to whatever registry is required.
 function newmoon.mod.create(id)
-    local mod = {id=id,objects=tnew(),item=tnew()}
+    local mod = newmoon.helper.optionaltable(id,{id=id})
     newmoon.mod.mods[id] = mod
     newmoon.mod.currentmod = mod
+    for _,v in pairs(newmoon.mod.createcallbacks) do
+        v(mod)
+    end
     return mod
 end
+newmoon.api = optionaltable("newmoon.api")
 return newmoon

@@ -1,6 +1,6 @@
 local mod = newmoon.mod.create("testmod")
-local testblock = newmoon.block.new({name="testblock"})
-mod.testblock = testblock
+--noinspection UnusedDef
+local testblock = newmoon.object.create({name="testBlock"})
 function testblock.init:voxel()
     self.texture = newmoon.texture.new("testblock")
 end
@@ -16,16 +16,15 @@ function testblock.callback:onUse()
     local inventoryRight = self.world:getAPI("right", newmoon.api.inventory)[1]
     inventoryRight:insertItem(inventoryLeft:extractItem())
 end
-local testchest = newmoon.block.new({name="testChest"})
-mod.testchest = testchest
+local testchest = newmoon.object.create({name="testChest"})
 function testchest.init:voxel()
-    self.texture = newmoon.texture.new("testblock")
+    self.texture = newmoon.texture.newTexture("testblock")
 end
 function testchest.init:side()
-    self.sprite = newmoon.texture.new("testblock_side")
+    self.sprite = newmoon.texture.newTexture("testblock_side")
 end
 function testchest.init:top()
-    self.sprite = newmoon.texture.new("testblock_top")
+    self.sprite = newmoon.texture.newTexture("testblock_top")
 end
 newmoon.api.inventory.install(testchest)
 return mod

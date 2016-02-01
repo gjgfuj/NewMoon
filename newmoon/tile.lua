@@ -1,4 +1,5 @@
-local tile = newmoon.helper.optionaltable("tile")
+local tile = newmoon.helper.optionaltable("newmoon.tile")
+table.insert(newmoon.mod.createcallbacks, function(mod) mod.tiles = {} end)
 ---Create a new tile.
 ---Object id expected at object.id
 ---Init functions: voxel() (in a 3d voxel game), top() (in a top-down game), side() (in a side on platformer type game.)
