@@ -6,8 +6,8 @@ table.insert(newmoon.mod.createcallbacks, function(mod) mod.items = {} end)
 function item.create(id)
     local b = {}
     b.id = id
-    b.init={}
-    b.callback={}
+    b.init=newmoon.helper.optionaltable(id..".init")
+    b.callback=newmoon.helper.optionaltable(id..".init")
     return b
 end
 newmoon.item = item

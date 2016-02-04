@@ -7,9 +7,9 @@ table.insert(newmoon.mod.createcallbacks, function(mod) mod.objects = {} end)
 function object.create(id)
     local b = {}
     b.id = id
-    b.init=newmoon.helper.optionaltable(b.name..".init")
-    b.callback=newmoon.helper.optionaltable(b.name..".callback")
-    newmoon.mod.currentmod.objects[b.name] = b
+    b.init=newmoon.helper.optionaltable(id..".init")
+    b.callback=newmoon.helper.optionaltable(id..".callback")
+    newmoon.mod.currentmod.objects[id] = b
     return b
 end
 newmoon.object = object

@@ -7,7 +7,7 @@ table.insert(newmoon.mod.createcallbacks, function(mod) mod.tiles = {} end)
 function tile.create(id)
     local b = {}
     b.id = id
-    b.init={}
+    b.init=newmoon.helper.optionaltable(id.."init")
     newmoon.mod.currentmod.tiles[b.id] = b
     return b
 end
