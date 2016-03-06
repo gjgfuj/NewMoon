@@ -1,8 +1,9 @@
 local oldpackagepath = package.path
-package.path = minetest.get_modpath("newmoon").."/?.lua;"..minetest.get_modpath("newmoon").."/?/init.lua"..oldpackagepath
+local modpath = minetest.get_modpath("newmoon")
+package.path = modpath.."/?.lua;"..modpath.."/?/init.lua;"..oldpackagepath
 _G.newmoon = require("fileloading")
 newmoon.texture = newmoon.helper.optionaltable("newmoon.texture")
-function newmoon.texture.new(name) return name..".png" end
+function newmoon.texture.new(name) return string.gsub(name,"/","_"):gsub(":","_")..".png" end
 function newmoon.loadmod(modname) require("mods."..modname) end
 require("mods")
 for modid,mod in pairs(newmoon.mod.mods) do
