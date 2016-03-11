@@ -9,7 +9,7 @@ local file = {}
 -- - `mode` is a string.
 --
 function file.read(path, mode)
-    mode = mode or '*a'
+    mode = mode or '*ab'
     local file, err = io.open(path, 'rb')
     if err then
         error(err)
@@ -28,7 +28,7 @@ end
 -- - `mode`    is a string.
 --
 function file.write(path, content, mode)
-    mode = mode or 'w'
+    mode = mode or 'wb'
     local file, err = io.open(path, mode)
     if err then
         error(err)
