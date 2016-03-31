@@ -8,7 +8,7 @@ table.insert(newmoon.mod.createcallbacks, function(mod) mod.tiles = {} end)
 ---In side, this is a world block.
 ---Callback functions: None! This is a decorative object, and all of it's functions are part of it's material.
 function tile.create(id)
-    local b = {}
+    local b = {material=newmoon.material.iron}
     b.id = id
     b.init=newmoon.helper.optionaltable(id.."init")
     newmoon.mod.currentmod.tiles[b.id] = b
