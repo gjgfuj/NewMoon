@@ -3,7 +3,7 @@ material.prototype = {type="none",tool="mining",breakstrength=1,explosionstrengt
 function material.new(matbase)
     local mbase = matbase or material.prototype
     local newmat = {__base=mbase}
-    newmat.setmetatable({
+    setmetatable(newmat,{
         __index=function(table,key) return table.__base[key] end
     })
     return newmat
