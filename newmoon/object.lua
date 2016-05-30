@@ -1,9 +1,10 @@
 local object = newmoon.helper.optionaltable("newmoon.object")
 table.insert(newmoon.mod.createcallbacks, function(mod) mod.objects = {} end)
 ---Create a new object.
----Object id expected at object.id
+---Params: id at object.id
 ---Init functions: voxel() (in a 3d voxel game), top() (in a top-down game), side() (in a side on platformer type game.)
 ---Callback functions: onUse() when the player activates the object.
+---World interaction: object.world: a context specific world object. Sides can be allocated in the init method.
 function object.create(id)
     local b = {}
     b.id = id

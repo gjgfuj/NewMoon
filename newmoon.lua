@@ -43,7 +43,7 @@ local function optionaltable(name,tbl)
 end
 function optionaltablemeta.__index(t,k)
     print(t.__apiname.."."..k.." not implemented")
-    return optionaltable(t.__apiname.."."..k)
+    return newmoon.helper.optionaltable(t.__apiname.."."..k)
 end
 function optionaltablemeta.__call(t)
     print(t.__apiname.."() not implemented")
@@ -66,4 +66,5 @@ function newmoon.mod.create(id)
     return mod
 end
 newmoon.api = optionaltable("newmoon.api")
+newmoon.const = optionaltable("newmoon.const")
 return newmoon
