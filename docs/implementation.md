@@ -7,6 +7,7 @@ To implement the newmoon API:
     `newmoon.texture.new(location,size)`, location is relative to modfolder/assets/textures
     -returns a table with `{loc=location, size=size}`, plus any other values needed to reference the texture.
 * set newmoon.const.worldtype to voxel, side, or top.
+* set newmoon.const.maxStackSize to the global maximum stack size of any inventory stack.
 If side or top perspective:
 * change newmoon.world.tilesize to reflect the size of the world tiles.
 

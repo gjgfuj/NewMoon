@@ -10,5 +10,16 @@ function item.create(id)
     b.callback=newmoon.helper.optionaltable(id..".init")
     return b
 end
+function item.itemstack(i, size)
+    local res = {}
+    while size > i.maxsize do
+        res[#res+1] = newmoon.item.itemstack(i, i.maxsize)
+        size = size - i.maxsize
+    end
+    local stack = {item=i,size=size }
+    setmetatable(stack,{__index=newmoon.item.itemstackfunc,__add=item.itemstackfunc.add,__sub=newmoon.item.itemstackfunc.sub})
+    res.insert(stack)
+    return res
+end
 newmoon.item = item
 return item
